@@ -6,14 +6,9 @@
             this.gameLogic = gameLogic;
         }
 
-    }
-
-    function getComputerChoice(){
-        return Math.floor(Math.random() * 3);
-    }
-
-    function gameLogic(fn){
-        if (fn() == 1){}
+        play(firstPlayerMove , secondPlayerMove){
+            return this.gameLogic(firstPlayerMove, secondPlayerMove)
+        }
     }
 
     class Moves{
@@ -24,12 +19,43 @@
 
     }
 
-    let rockPaperScissors = new Game('ROCK-PAPER-SCISSORS', gameLogic(getComputerChoice))
+    function getComputerChoice(moves){
+        const numComputerChoice = Math.floor(Math.random() * 3);
 
-    let movesForRPS = new Moves('paper', 'scissors', 'rock');
+        return moves[numComputerChoice];
+    }
 
-    console.log(movesForRPS.moves)
-    addEventListener('DOMContentLoaded', function(){
+    function getHumanChoice(moves){
+        let nameMove = prompt('Write paper, rock or scissors');
+        for (let move of moves){
+            if (nameMove == move.name){
+                console.log(move)
+                return move;
+            }
+        }
+    }
 
-    })
+    function gameLogic(firstPlayerMove, secondPlayerMove){
+
+        if (firstPlayerMove.name == secondPlayerMove.name){
+            return 'НИЧЬЯ'
+        }
+
+        if (firstPlayerMove.wins == secondPlayerMove.name){
+
+            return 'Первый игрок победил!'
+
+        }else {
+
+            return 'Второй игрок победил!'
+
+        }
+    }
+
+    let movesForRPS = new Moves({name:'paper', wins: 'rock'}, {name:'scissors', wins: 'paper'}, {name:'rock', wins: 'scissors'});
+
+    let rockPaperScissors = new Game('ROCK-PAPER-SCISSORS', gameLogic);
+
+    rockPaperScissors.play(getComputerChoice(movesForRPS.moves), getHumanChoice(movesForRPS.moves))
+
 })()
