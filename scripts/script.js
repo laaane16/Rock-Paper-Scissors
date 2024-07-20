@@ -27,7 +27,7 @@
     }
 
     function getHumanChoice(moves){
-        let nameMove = prompt('Write paper, rock or scissors');
+        const nameMove = prompt('Write paper, rock or scissors');
         for (let move of moves){
             if (nameMove == move.name){
                 return move;
