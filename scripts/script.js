@@ -1,3 +1,4 @@
+
 (function(){
     class Game{
 
@@ -14,7 +15,7 @@
     class Moves{
 
         constructor(...arg){
-            this.moves = [arg] 
+            this.moves = arg 
         }
 
     }
@@ -29,25 +30,23 @@
         let nameMove = prompt('Write paper, rock or scissors');
         for (let move of moves){
             if (nameMove == move.name){
-                console.log(move)
                 return move;
             }
         }
     }
 
     function gameLogic(firstPlayerMove, secondPlayerMove){
-
+        
+        console.log(`Ход вашего противника ${firstPlayerMove.name}`)
         if (firstPlayerMove.name == secondPlayerMove.name){
-            return 'НИЧЬЯ'
+            console.log('НИЧЬЯ')
         }
 
-        if (firstPlayerMove.wins == secondPlayerMove.name){
-
-            return 'Первый игрок победил!'
+        else if (firstPlayerMove.wins == secondPlayerMove.name){
+            console.log('Победил ваш противник')
 
         }else {
-
-            return 'Второй игрок победил!'
+            console.log('Вы победили!')
 
         }
     }
